@@ -4,9 +4,11 @@
     box-sizing: border-box;
 }
 body {
+    background: #B0BEC5;
     font-family: 'Lato', sans-serif;
     font-size: 14px;
   }
+
 .conteiner {
     width: 1024px;
     margin: auto;
@@ -18,15 +20,25 @@ body {
     justify-content: center;
     align-items: center;
     height: 200px;
-    
+    background-color: aliceblue;
 }
-.gallary {
+.search h1 {
+    color: #546E7A;
+    font-size: 40px;
+    margin-bottom: 25px;
+}
+.search input {
+    width: 200px;
+    height: 30px;
+    border-radius: 6px;
+}
+.gallery {
     width: 100%;
-    border: 1px solid black;
     display: flex;
     flex-wrap : wrap;
     justify-content: space-around;
     padding: 5%;
+    background-color:#B4CAC7;
 }
 .film {
     width: 260px;

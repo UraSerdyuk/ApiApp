@@ -1,5 +1,5 @@
 let input = document.querySelector('#inputSearch');
-let gallary = document.querySelector('.gallary');
+let gallery = document.querySelector('.gallery');
 
 // заполнение input  с локалхоста
 if(input.value === ''){
@@ -15,7 +15,7 @@ input.addEventListener('keydown',(e)=>{
     //при нажатии на энтер
     if(e.keyCode === 13){
         //очистка галереи от старого поиска
-        clearCard(gallary);
+        clearCard(gallery);
         // функция поиска  ;
         search();
     }
@@ -56,7 +56,7 @@ function createCards(data){
 
        //append
         card.append(cardNameFilm);
-        gallary.append(card);
+        gallery.append(card);
     }
 }
 
