@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+  }
+.conteiner {
+    width: 1024px;
+    margin: auto;
+    border: 1px solid black;
+}
+.search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    
+}
+.gallary {
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap : wrap;
+    justify-content: space-around;
+    padding: 5%;
+}
+.film {
+    width: 260px;
+    height: 310px;
+    background:#c7cddc;
+    border: 2px solid white;
+    margin-bottom: 15px;
+    background-size: 100%;
+}
+.cardName {
+    text-align: center;
+    color: white;
+}
