@@ -29,21 +29,30 @@ fetch(`http://api.tvmaze.com/search/shows?q=${str}`)
     })
     .then(function(data){
         createCards(data);
-      //  console.log(data);
-        
     })
 }
 
 //создание карточки 
 function createCards(data){
+    if(data.length===0){
+         setTimeout(alert(' Nothing found'),1000);
+    }
+
     for(el of data){
         console.log(el);
         const card = document.createElement('div');
         const cardNameFilm = document.createElement('h1');
+        const aboutFilm = document.createElement('a');
+        //атрибуты
+         aboutFilm.setAttribute( 'href', el.show.url);
+
+
         //клас
         card.classList = 'film';
+        aboutFilm.classList = 'aboutFilm';
         //текст 
         cardNameFilm.textContent = el.show.name;
+        aboutFilm.textContent = 'more about film';
 
         //стили
        (el.show.image !== null)
@@ -55,7 +64,7 @@ function createCards(data){
    
 
        //append
-        card.append(cardNameFilm);
+        card.append(cardNameFilm,aboutFilm);
         gallery.append(card);
     }
 }
@@ -63,7 +72,7 @@ function createCards(data){
 
 // очистка карточек
 function clearCard(perent) {
-(perent.children.length > 0)? remuve(perent) :console.log('пустой');
+(perent.children.length > 0) ? remuve(perent) : console.log('пустой');
 
 function remuve(perent){
     perent.innerHTML = '';

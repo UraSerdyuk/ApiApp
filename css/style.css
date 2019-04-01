@@ -34,6 +34,7 @@ body {
 }
 .gallery {
     width: 100%;
+    height: 1350px;
     display: flex;
     flex-wrap : wrap;
     justify-content: space-around;
@@ -47,8 +48,15 @@ body {
     border: 2px solid white;
     margin-bottom: 15px;
     background-size: 100%;
+    padding: 3%;
 }
 .cardName {
     text-align: center;
     color: white;
+}
+.aboutFilm {
+    text-align: center;
+    display: block;
+    color: white;
+    font-size: 18px;
 }
