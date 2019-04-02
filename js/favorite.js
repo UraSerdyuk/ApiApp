@@ -1,9 +1,8 @@
 let gallery = document.querySelector('.gallery');
 let data = JSON.parse(localStorage.getItem('dataFavorite'));
-
 for(el of data){
     // console.log(el.show.id);
-     const card = document.createElement('div');
+     const card = document.createElement('li');
      const cardNameFilm = document.createElement('h1');
      const aboutFilm = document.createElement('a');
      const addToFavorites = document.createElement('button');
@@ -19,7 +18,7 @@ for(el of data){
      //текст 
      cardNameFilm.textContent = el.show.name;
      aboutFilm.textContent = 'more about film';
-     addToFavorites.textContent = 'add to favorites';
+     addToFavorites.textContent = 'remove serial';
 
      //стили
     (el.show.image !== null)
@@ -33,4 +32,26 @@ for(el of data){
     //append
      card.append(cardNameFilm,aboutFilm,addToFavorites);
      gallery.append(card);
+ }
+ 
+ gallery.addEventListener('click',removeCard);
+
+ function removeCard(e){
+    const target = e.target;
+    if(target.nodeName !== 'BUTTON') {return}
+     const id =  +target.parentNode.id;
+
+    remuveSerialFromLocalStorege(id);
+    target.parentNode.remove();
+ }
+
+ //удаление сериала
+ function remuveSerialFromLocalStorege(id) {
+    let arr =  JSON.parse(localStorage.getItem('dataFavorite'));
+
+    let newArr =  arr.filter(e=>{
+        return e.show.id !== id;
+    });
+    localStorage.setItem('dataFavorite', JSON.stringify(newArr));
+ 
  }
