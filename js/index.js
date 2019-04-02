@@ -13,15 +13,7 @@ if(input.value === ''){
 }
 
 // обработчики
-btnSearch.addEventListener('click',e=>{
-    str = input.value;
-    localStorage.setItem('input', str);
 
-    clearCard(gallery);
-    // функция поиска  ;
-    search();
-
-});
 
 input.addEventListener('keydown',create);
 function create(e){
