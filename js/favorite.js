@@ -1,6 +1,7 @@
 let gallery = document.querySelector('.gallery');
 let data = JSON.parse(localStorage.getItem('dataFavorite'));
 
+//создание карточек
 for(el of data){
     // console.log(el.show.id);
      const card = document.createElement('li');
@@ -34,24 +35,25 @@ for(el of data){
      card.append(cardNameFilm,aboutFilm,addToFavorites);
      gallery.append(card);
  }
- 
+
+ //обработчик удаление сериала из списка 
  gallery.addEventListener('click',removeCard);
 
+//удаление дом элемента
  function removeCard(e){
     const target = e.target;
     if(target.nodeName !== 'BUTTON') {return}
-     const id =  +target.parentNode.id;
+     const id = +target.parentNode.id;
 
     remuveSerialFromLocalStorege(id);
     target.parentNode.remove();
  }
 
-
+//удаление из локалсторедж
  function remuveSerialFromLocalStorege(id) {
     let arr =  JSON.parse(localStorage.getItem('dataFavorite'));
     let newArr =  arr.filter(e=>{
         return e.show.id !== id;
     });
     localStorage.setItem('dataFavorite', JSON.stringify(newArr));
- 
  }

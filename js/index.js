@@ -13,8 +13,6 @@ if(input.value === ''){
 }
 
 // обработчики
-
-
 input.addEventListener('keydown',create);
 function create(e){
     str = e.target.value;
@@ -27,26 +25,21 @@ function create(e){
         // функция поиска  ;
         search();
     }
-
 }
 
-
 gallery.addEventListener('click',e =>{
-   
+    const target = e.target;
 
-    const target = e.target
     if(target.nodeName !== 'BUTTON') {return}
-     //animatin 
-     console.log(e.target);
+     //анимация на нажитии на кнопку
      target.style.background = '#f77549';
 
     if(!localStorage.getItem('dataFavorite')){
         localStorage.setItem('dataFavorite','[]');
     }
     let arr = JSON.parse(localStorage.getItem('dataFavorite'));
-    console.log(arr);
 
-         addElementToFavorite(target,arr);
+     addElementToFavorite(target,arr);
 });
 
 // Api запрос
@@ -101,9 +94,9 @@ function createCards(data){
 
 // очистка карточек
 function clearCard(perent) {
-(perent.children.length > 0) ? remuve(perent) : console.log('пустой');
+(perent.children.length > 0) ? remove(perent) : console.log('пустой');
 
-function remuve(perent){
+function remove(perent){
     perent.innerHTML = '';
 }
 }
@@ -116,9 +109,7 @@ function addElementToFavorite(target,arr){
     let elem = _data.find(e=>{
         return e.show.id === id;
     });
-
-
-    // тут нужно сделать проверка на уже существующий елемент
+//проверка , существует ли елемент в колекции локал сторедж
     const validator =  arr.find(e=>{
         return e.show.id === id;
     });
