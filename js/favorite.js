@@ -1,5 +1,6 @@
 let gallery = document.querySelector('.gallery');
 let data = JSON.parse(localStorage.getItem('dataFavorite'));
+
 for(el of data){
     // console.log(el.show.id);
      const card = document.createElement('li');
@@ -45,10 +46,9 @@ for(el of data){
     target.parentNode.remove();
  }
 
- //удаление сериала
+
  function remuveSerialFromLocalStorege(id) {
     let arr =  JSON.parse(localStorage.getItem('dataFavorite'));
-
     let newArr =  arr.filter(e=>{
         return e.show.id !== id;
     });

@@ -73,6 +73,7 @@ body {
     color: white;
     border-radius: 7px;
     outline:none;
+    transition-duration: 1s;
 }
 .btnFavorites > a {
     color: white;

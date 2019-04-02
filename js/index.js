@@ -1,8 +1,11 @@
 const input = document.querySelector('#inputSearch');
 const gallery = document.querySelector('.gallery');
+const btnSearch  = document.querySelector('.btnSearch');
 
 let localStorageData = [];
 let _data  = [];
+let str = '';
+let arr = [];
 
 // заполнение input  с локалхоста
 if(input.value === ''){
@@ -10,9 +13,18 @@ if(input.value === ''){
 }
 
 // обработчики
-let str = '';
-let arr = [];
-input.addEventListener('keydown',(e)=>{
+btnSearch.addEventListener('click',e=>{
+    str = input.value;
+    localStorage.setItem('input', str);
+
+    clearCard(gallery);
+    // функция поиска  ;
+    search();
+
+});
+
+input.addEventListener('keydown',create);
+function create(e){
     str = e.target.value;
     localStorage.setItem('input', str);
 
@@ -23,12 +35,18 @@ input.addEventListener('keydown',(e)=>{
         // функция поиска  ;
         search();
     }
-});
+
+}
 
 
 gallery.addEventListener('click',e =>{
+   
+
     const target = e.target
     if(target.nodeName !== 'BUTTON') {return}
+     //animatin 
+     console.log(e.target);
+     target.style.background = '#f77549';
 
     if(!localStorage.getItem('dataFavorite')){
         localStorage.setItem('dataFavorite','[]');
@@ -38,7 +56,6 @@ gallery.addEventListener('click',e =>{
 
          addElementToFavorite(target,arr);
 });
-
 
 // Api запрос
 function search(){
@@ -72,6 +89,7 @@ function createCards(data){
         card.classList = 'film';
         aboutFilm.classList = 'aboutFilm';
         addToFavorites.classList = 'btnFavorites';
+        cardNameFilm.classList = 'cardName';
         //текст 
         cardNameFilm.textContent = el.show.name;
         aboutFilm.textContent = 'more about film';
@@ -81,7 +99,7 @@ function createCards(data){
        (el.show.image !== null)
        ?    card.style.backgroundImage = `url(${el.show.image.medium}) `
        :    card.style.backgroundImage = '';
-       cardNameFilm.classList = 'cardName';
+       
 
        //append
         card.append(cardNameFilm,aboutFilm,addToFavorites);
