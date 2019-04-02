@@ -31,6 +31,7 @@ body {
     width: 200px;
     height: 30px;
     border-radius: 6px;
+    margin-bottom: 20px;
 }
 .gallery {
     width: 100%;
@@ -42,6 +43,10 @@ body {
     background-color:#B4CAC7;
 }
 .film {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
     width: 260px;
     height: 310px;
     background:#c7cddc;
@@ -59,4 +64,13 @@ body {
     display: block;
     color: white;
     font-size: 18px;
+}
+
+.btnFavorites {
+    width: 100px;
+    height: 30px;
+    background-color:#71608cd9;
+    color: white;
+    border-radius: 7px;
+    outline:none;
 }

@@ -8,6 +8,7 @@ if(input.value === ''){
 
 // обработчик на input 
 let str = '';
+let arr = [];
 input.addEventListener('keydown',(e)=>{
     str = e.target.value;
     localStorage.setItem('input', str);
@@ -20,6 +21,12 @@ input.addEventListener('keydown',(e)=>{
         search();
     }
 });
+gallery.addEventListener('click',e=>{
+    const target = e.target
+        if(target.nodeName !== 'BUTTON') {return}
+        console.log(e);
+});
+
 
 // Api запрос
 function search(){
@@ -37,12 +44,12 @@ function createCards(data){
     if(data.length===0){
          setTimeout(alert(' Nothing found'),1000);
     }
-
     for(el of data){
         console.log(el);
         const card = document.createElement('div');
         const cardNameFilm = document.createElement('h1');
         const aboutFilm = document.createElement('a');
+        const addToFavorites = document.createElement('button');
         //атрибуты
          aboutFilm.setAttribute( 'href', el.show.url);
 
@@ -50,9 +57,11 @@ function createCards(data){
         //клас
         card.classList = 'film';
         aboutFilm.classList = 'aboutFilm';
+        addToFavorites.classList = 'btnFavorites';
         //текст 
         cardNameFilm.textContent = el.show.name;
         aboutFilm.textContent = 'more about film';
+        addToFavorites.textContent = 'add to favorites';
 
         //стили
        (el.show.image !== null)
@@ -64,7 +73,7 @@ function createCards(data){
    
 
        //append
-        card.append(cardNameFilm,aboutFilm);
+        card.append(cardNameFilm,aboutFilm,addToFavorites);
         gallery.append(card);
     }
 }
