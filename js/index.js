@@ -1,6 +1,7 @@
 let input = document.querySelector('#inputSearch');
 let gallery = document.querySelector('.gallery');
-
+let localStorageData = [];
+let _data  = [];
 // заполнение input  с локалхоста
 if(input.value === ''){
     input.value = localStorage.getItem('input');
@@ -21,10 +22,29 @@ input.addEventListener('keydown',(e)=>{
         search();
     }
 });
-gallery.addEventListener('click',e=>{
+
+
+gallery.addEventListener('click',e =>{
     const target = e.target
-        if(target.nodeName !== 'BUTTON') {return}
-        console.log(e);
+    if(target.nodeName !== 'BUTTON') {return}
+
+    if(!localStorage.getItem('dataFavorite')){
+        localStorage.setItem('dataFavorite','[]');
+    }
+    let arr = JSON.parse(localStorage.getItem('dataFavorite'));
+    console.log(arr);
+
+         addElementToFavorite(target,arr);
+
+  
+    //2 
+        //    взять карточку 
+        //addElementToFavorite();    
+        //берет дату и переводит в масив
+
+    //3
+
+  // console.log(_data);
 });
 
 
@@ -35,6 +55,7 @@ fetch(`http://api.tvmaze.com/search/shows?q=${str}`)
         return response.json();
     })
     .then(function(data){
+        _data =  data
         createCards(data);
     })
 }
@@ -45,14 +66,15 @@ function createCards(data){
          setTimeout(alert(' Nothing found'),1000);
     }
     for(el of data){
-        console.log(el);
+       // console.log(el.show.id);
         const card = document.createElement('div');
         const cardNameFilm = document.createElement('h1');
         const aboutFilm = document.createElement('a');
         const addToFavorites = document.createElement('button');
         //атрибуты
+        card.setAttribute('id',`${el.show.id}`)
          aboutFilm.setAttribute( 'href', el.show.url);
-
+         aboutFilm.setAttribute('target',"_blank");
 
         //клас
         card.classList = 'film';
@@ -86,4 +108,25 @@ function clearCard(perent) {
 function remuve(perent){
     perent.innerHTML = '';
 }
+}
+
+
+// добавляем карточку в список любимые сериалы
+function addElementToFavorite(target,arr){
+    let id = +target.parentNode.id;
+    //поиск элемента в масиве , пришел из fetch запроса
+    let elem = _data.find(e=>{
+        return e.show.id === id;
+    });
+
+
+    // тут нужно сделать проверка на уже существующий елемент
+    const validator =  arr.find(e=>{
+        return e.show.id === id;
+    });
+    if(!validator){
+        console.log('добавляем');
+        arr.push(elem);
+        localStorage.setItem('dataFavorite', JSON.stringify(arr)); 
+    }        
 }
